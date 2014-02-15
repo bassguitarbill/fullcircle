@@ -37,6 +37,18 @@ function split(string){
 			} else {
 				fwchars = fwchars + chars[i];
 			}
+		} else if (state === "deutsche"){
+			if (charValue < 65){
+				fwchars = fwchars + chars[i];
+			} else if(charValue < 91){
+				fwchars = fwchars + String.fromCharCode(charValue + 55284);
+			} else if (charValue < 97){
+				fwchars = fwchars + chars[i];
+			} else if (charValue < 123){
+				fwchars = fwchars + String.fromCharCode(charValue + 55310);
+			} else {
+				fwchars = fwchars + chars[i];
+			}
 		}
 	}
 	document.getElementById("demo").innerHTML=fwchars;
@@ -53,5 +65,9 @@ document.getElementById("fw").onclick=function(){
 document.getElementById("bubble").onclick=function(){
 	state = "bubble";
   split(document.getElementById("input").value)
+};
+document.getElementById("deutsche").onclick=function(){
+	state = "deutsche";
+	split(document.getElementById("input").value);
 };
 document.getElementById("input").focus();
